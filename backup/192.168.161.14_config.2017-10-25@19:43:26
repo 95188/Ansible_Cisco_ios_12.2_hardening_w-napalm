@@ -1,0 +1,309 @@
+Building configuration...
+
+Current configuration : 6728 bytes
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname Rtest
+!
+boot-start-marker
+boot-end-marker
+!
+logging buffered 15000
+!
+username pi privilege 15 password 7 045802150C2E
+username leroy privilege 15 password 7 00071A150754
+!
+!
+no aaa new-model
+system mtu routing 1500
+vtp domain test
+vtp mode transparent
+ip routing
+no ip domain-lookup
+ip domain-name thenetwork.engineer
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3876965760
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3876965760
+ revocation-check none
+ rsakeypair TP-self-signed-3876965760
+!
+!
+crypto pki certificate chain TP-self-signed-3876965760
+ certificate self-signed 01
+  30820251 308201BA A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33383736 39363537 3630301E 170D3933 30333031 30303030 
+  35365A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 38373639 
+  36353736 3030819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100D097 40D48945 3B152D28 5698DF2D CD5CFE93 A9A037E5 29A7E354 F0612B1F 
+  F7BA2C57 421E1449 025312ED 7DF53F43 A8652AEE AD7E3D1A 5ABFB179 0C28791F 
+  76DAE847 286B4505 7ABEE3E3 A3215F6C EA139572 771C31A7 66AAC9DD 41E85B07 
+  D799D92C 4DC035A4 2A041847 E269F260 B30E0537 103C24E9 8D4A8A3C 3F6488D8 
+  AFAB0203 010001A3 79307730 0F060355 1D130101 FF040530 030101FF 30240603 
+  551D1104 1D301B82 19527465 73742E74 68656E65 74776F72 6B2E656E 67696E65 
+  6572301F 0603551D 23041830 16801436 0A5D16AD 33DE3BD8 A9C11581 41641848 
+  2D162B30 1D060355 1D0E0416 0414360A 5D16AD33 DE3BD8A9 C1158141 6418482D 
+  162B300D 06092A86 4886F70D 01010405 00038181 002D1720 2D8B67C4 E842D561 
+  F93CD5B5 B221E19A C88FC952 AD011159 4F06C3A2 9F128877 25B491BD F4221E6C 
+  3B1A80BE 0A8FB067 45CA0978 CE52B1C8 C098AFCF F3BA0768 21B6F962 6C96BC16 
+  A5145AF0 855F1CAE 49C81F19 1F572D9F C404DF67 89674051 F20C9AFB 0037EE5F 
+  F8A2BDF7 96F8DDDC 8B6E7731 E9E6F5C6 D43F5E91 DA
+  quit
+!
+!
+!
+archive
+ path flash:archive
+ write-memory
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+vlan 2
+ name THEBESTVLANEVER
+!
+vlan 3-4 
+!
+vlan 5
+ name 2DAYCCNA
+!
+vlan 6-8 
+!
+vlan 9
+ name YABADABADOOO
+!
+vlan 10 
+!
+vlan 11
+ name SAVAGENATION
+!
+vlan 15
+ name RUNZA
+!
+vlan 33
+ name OSPF_SESSION_CLAY
+!
+vlan 52
+ name VLANTOOTHERLAB
+!
+vlan 66
+ name WHATWHAT
+!
+vlan 100 
+!
+vlan 155
+ name test
+!
+vlan 200-201,300-301 
+!
+vlan 711
+ name TRUNKTORAY
+!
+ip ssh version 2
+ip scp server enable
+!
+!
+!
+interface Loopback0
+ ip address 2.2.2.2 255.255.255.255
+ ip ospf 1 area 0
+!
+interface Loopback2
+ description Marketing
+ ip address 10.1.2.1 255.255.255.0
+ ip ospf network point-to-point
+!
+interface Loopback3
+ no ip address
+ ip ospf network point-to-point
+!
+interface FastEthernet0/1
+ no switchport
+ ip address 192.168.161.14 255.255.255.0
+!
+interface FastEthernet0/2
+ description R1 int fa0/2 inter-connect
+ no switchport
+ ip address 10.1.12.2 255.255.255.0
+!
+interface FastEthernet0/3
+ no switchport
+ ip address 10.1.23.2 255.255.255.0
+ ip ospf 1 area 23
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+ description ROUTER 4 fa0/2 inter-connect
+ no switchport
+ no ip address
+ ip ospf 1 area 100
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface FastEthernet0/25
+!
+interface FastEthernet0/26
+!
+interface FastEthernet0/27
+!
+interface FastEthernet0/28
+!
+interface FastEthernet0/29
+!
+interface FastEthernet0/30
+!
+interface FastEthernet0/31
+!
+interface FastEthernet0/32
+!
+interface FastEthernet0/33
+!
+interface FastEthernet0/34
+!
+interface FastEthernet0/35
+!
+interface FastEthernet0/36
+!
+interface FastEthernet0/37
+!
+interface FastEthernet0/38
+!
+interface FastEthernet0/39
+!
+interface FastEthernet0/40
+!
+interface FastEthernet0/41
+!
+interface FastEthernet0/42
+!
+interface FastEthernet0/43
+!
+interface FastEthernet0/44
+!
+interface FastEthernet0/45
+!
+interface FastEthernet0/46
+!
+interface FastEthernet0/47
+!
+interface FastEthernet0/48
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface GigabitEthernet0/3
+!
+interface GigabitEthernet0/4
+!
+interface Vlan1
+ no ip address
+!
+router ospf 1
+ router-id 2.2.2.2
+ log-adjacency-changes
+ area 23 stub no-summary
+ network 10.1.2.0 0.0.0.255 area 0
+ network 10.1.12.0 0.0.0.255 area 0
+ network 10.1.23.0 0.0.0.255 area 23
+!
+ip classless
+no ip http server
+no ip http secure-server
+!
+!
+ip sla enable reaction-alerts
+no cdp run
+no cdp tlv location
+no cdp tlv app
+!
+!
+banner login ^C
+#paste login banner below
+^-----------------------------------------------------------------------
+<SW NAME>
+ HODL CORP
+ THIS IS A HODL CORP COMPUTER SYSTEM. THIS COMPUTER
+ SYSTEM, INCLUDING ALL RELATED EQUIPMENT, NETWORKS AND NETWORK DEVICES
+ (SPECIFICALLY INCLUDING INTERNET ACCESS), ARE PROVIDED ONLY FOR
+ AUTHORIZED USE. HODL CORP SYSTEMS MAY BE MONITORED
+ FOR ALL LAWFUL PURPOSES, INCLUDING TO ENSURE THAT THEIR USE IS
+ AUTHORIZED, FOR MANAGEMENT OF THE SYSTEM, TO FACILITATE PROTECTION
+ AGAINST UNAUTHORIZED ACCESS, AND TO VERIFY SECURITY PROCEDURES,
+ SURVIVABILITY AND OPERATIONAL SECURITY. MONITORING INCLUDES ACTIVE
+ ATTACKS BY AUTHORIZED COMPANY ENTITIES TO TEST OR VERIFY THE SECURITY OF
+ THIS SYSTEM. DURING MONITORING, INFORMATION MAY BE EXAMINED,
+ RECORDED, COPIED AND USED FOR AUTHORIZED PURPOSES. ALL INFORMATION,
+ INCLUDING PERSONAL INFORMATION, PLACED ON OR SENT OVER THIS SYSTEM MAY
+ BE MONITORED.
+ USE OF THIS HODL CORP SYSTEM, AUTHORIZED OR UNAUTHORIZED,
+ CONSTITUTES CONSENT TO MONITORING OF THIS SYSTEM. UNAUTHORIZED USE
+ MAY SUBJECT YOU TO CRIMINAL PROSECUTION. EVIDENCE OF UNAUTHORIZED USE
+ COLLECTED DURING MONITORING MAY BE USED FOR ADMINISTRATIVE, CRIMINAL
+ OR OTHER ADVERSE ACTION. USE OF THIS SYSTEM CONSTITUTES CONSENT TO
+ MONITORING FOR THESE PURPOSES.
+-----------------------------------------------------------------------
+^
+^C
+banner motd ^CWelcome to the 234 day CCNA boot camp^C
+!
+line con 0
+ logging synchronous
+line vty 0 4
+ exec-timeout 0 0
+ login local
+ transport input all
+line vty 5 15
+ exec-timeout 0 0
+ login local
+ transport input all
+!
+end

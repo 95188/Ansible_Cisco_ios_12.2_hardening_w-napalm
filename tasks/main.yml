@@ -11,7 +11,18 @@
         username: "{{ creds['username'] }}"
         password: "{{ creds['password'] }}"
         auth_pass: "{{ creds['auth_pass'] }}"
-        transport: cli
+       
+# Backup config. Make sure to not run backup again in playbook
+# later runs overwrite this backup.
+  - name: Backup current config
+    ios_config:
+      backup: yes
+      provider: "{{ provider }}"
+    register: backup_config
+
+  - debug:
+      var: backup_config.backup_path
+      verbosity: 3
 
 
   - name: "create a diff"
@@ -21,7 +32,7 @@
       password: "{{ creds['password'] }}"
       dev_os: "ios"
       config_file: ./vars/initial.conf
-      commit_changes: false
-      replace_config: false
+      commit_changes: true
+      replace_config: true
       diff_file: ./vars/initial.diff
 
